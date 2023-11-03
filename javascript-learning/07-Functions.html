@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Functions</title>
+  </head>
+  <body>
+    <script>
+      function function1(number)
+      {
+        lowerNumber = number;
+        if(lowerNumber <= 1)
+        {
+          return 1;
+        }
+        else
+        {
+          lowerNumber--;
+          return number * function1(lowerNumber);
+        }
+      }
+
+      numberAfterFunction = function1(3);
+
+      console.log(numberAfterFunction);
+    </script>
+  </body>
+</html>

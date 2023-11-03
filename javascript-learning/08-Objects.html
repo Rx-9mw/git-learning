@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Objects</title>
+    <script>
+      function Flush(){
+      localStorage.clear();
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="Flush()">Flush da toiler</button><br><br>
+    <script>
+     /* 
+      const product2 = {
+        name: 'shirt',
+        'delivery-time': '',
+        availability: true,
+        rating: {
+          stars: 4.5,
+          count: 87
+        },
+        fun: function function1(){
+          console.log('function inside an object');
+        }
+      };
+      console.log(product2);
+      console.log(product2.name);
+      console.log(product2['name']);
+      product2['delivery-time'] = 'one day';
+      console.log(product2['delivery-time']);
+      console.log(product2.rating.stars)
+      product2.fun();
+      console.log(JSON.stringify(product2));
+
+      const jsonString = JSON.stringify(product2);
+
+      console.log(JSON.parse(jsonString));
+      
+      let greeting = 'hello';
+      let firstLetter = greeting.charAt(0);
+      greeting = firstLetter.toUpperCase() + greeting.slice(1);
+      console.log(greeting);
+      console.log(greeting.length);
+      console.log(greeting.toLowerCase());
+      
+      const object1 = {
+        message: 'hello'
+      }
+
+      const object2 = object1;
+
+      object1.message = 'hi';
+
+      console.log(object1);
+      console.log(object2);
+
+      const object3 = {
+        message: 'hi'
+      }
+
+      console.log(object3 === object1);
+      console.log(object2 === object1);
+      console.log(object3.message === object1.message);
+
+      const object4 = {
+        message: 'hi',
+        price:7.99
+      }
+
+      //const message = object4.message;
+
+      const {message, price} = object4;
+      
+      console.log(message);
+      console.log(price);
+
+      const object5 = {
+        message,
+        method(){
+          console.log('method');
+        }
+      };
+      console.log(object5);
+      object5.method();
+      */
+     const text = 'hello';
+     const repeatedText = text.repeat(2);
+     console.log(repeatedText);
+    </script>
+  </body>
+</html>

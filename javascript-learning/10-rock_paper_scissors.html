@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+    <script>
+      function Flush(){
+        localStorage.clear();
+      }
+    </script>
+    <style>
+      body {
+        background-color: rgb(25,25,25);
+        color: white;
+        font-family: Arial;
+      }
+      .title {
+        font-size: 30px;
+        font-weight: bold;
+      }
+      .move-icon {
+        height: 50px;
+      }
+      .move-button {
+        background-color: transparent;
+        border: 3px solid white;
+        cursor: pointer;
+        width: 120px;
+        height: 120px;
+        border-radius: 60px;
+        margin-right: 10px;
+      }
+      .result {
+        font-size: 25px;
+        font-weight: bold;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="Flush()">Flush da toiler</button><br><br>
+    <p class="title">Rock Paper Scissors</p>
+    <button onclick="
+      playGame('rock');
+    " class="move-button">
+      <img class="move-icon" src="images/rock-emoji.png" alt="rock emoji">
+    </button>
+
+    <button onclick="
+      playGame('paper');
+    " class="move-button">
+      <img class="move-icon" src="images/paper-emoji.png" alt="rock emoji">
+    </button>
+
+    <button onclick="
+      playGame('scissors');
+    " class="move-button">
+      <img class="move-icon" src="images/scissors-emoji.png" alt="rock emoji">
+    </button>
+
+    <p id="js-result" class="result">You win.</p>
+
+    <p id="js-picks">
+      You
+      <img src="images/rock-emoji.png">
+    </p>
+
+    <p id="js-scoreBoard"></p>
+
+    <button onclick="
+      resetGameScore();
+    ">Reset Game Score</button>
+
+    <script>
+      let computerMove = '';
+
+      let gameScoreRPS = JSON.parse(localStorage.getItem('score')) || {
+        wins:0,
+        losses:0,
+        ties:0
+      };
+
+      const scoreBoard = document.getElementById('js-scoreBoard');
+
+      scoreBoard.innerHTML = `Wins:${gameScoreRPS.wins},
+      Losses:${gameScoreRPS.losses},
+      Ties:${gameScoreRPS.ties}`;
+
+      const picks = document.getElementById('js-picks');
+
+      function playGame(playerMove){
+        const computerMove = pickComputerMove();
+        
+        let result = '';
+
+        if(playerMove === 'scissors'){
+          if (computerMove === 'rock') {
+            result = 'You lose.';
+          } else if (computerMove === 'paper') {
+            result = 'You win.';
+          } else if (computerMove === 'scissors') {
+            result = 'Tie.';
+          }
+
+        } else if(playerMove === 'paper') {
+          if (computerMove === 'rock') {
+            result = 'You win.';
+          } else if (computerMove === 'paper') {
+            result = 'Tie.';
+          } else if (computerMove === 'scissors') {
+            result = 'You lose.';
+          }
+          
+        } else {
+          if (computerMove === 'rock') {
+            result = 'Tie.';
+          } else if (computerMove === 'paper') {
+            result = 'You lose.';
+          } else if (computerMove === 'scissors') {
+            result = 'You win.';
+          }
+        }
+
+        if (result === 'You win.'){
+          gameScoreRPS.wins++;
+        } else if (result === 'You lose.') {
+          gameScoreRPS.losses++;
+        } else { 
+          gameScoreRPS.ties++;
+        }
+
+        localStorage.setItem('score', JSON.stringify(gameScoreRPS));
+
+        document.getElementById('js-result').innerHTML = result;
+
+        picks.innerHTML = `You picked ${playerMove}. Computer picked ${computerMove}.`
+
+        updateScoreElement();
+      }
+
+      function updateScoreElement(){
+        scoreBoard.innerHTML = `Wins:${gameScoreRPS.wins},
+        Losses:${gameScoreRPS.losses},
+        Ties:${gameScoreRPS.ties}`;
+      }
+
+      function pickComputerMove(){
+        const randomNumber = Math.random();
+
+        if (randomNumber >= 0 && randomNumber < 1 / 3) {
+          computerMove = 'rock';
+        } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3)  {
+          computerMove = 'paper';
+        } else if (randomNumber >= 2 / 3 && randomNumber < 1){
+          computerMove = 'scissors';
+        }
+        return computerMove;
+      }
+
+      function resetGameScore()
+      {
+        gameScoreRPS.losses = 0;
+        gameScoreRPS.wins = 0;
+        gameScoreRPS.ties = 0;
+
+        scoreBoard.innerHTML = `Wins:${gameScoreRPS.wins},
+        Losses:${gameScoreRPS.losses},
+        Ties:${gameScoreRPS.ties}`;
+
+        localStorage.removeItem('score');
+      }
+    </script>
+  </body>
+</html>

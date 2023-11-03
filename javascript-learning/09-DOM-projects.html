@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM projects</title>
+  </head>
+  <body>
+    <p>Youtube Subscribe Button</p>
+    <button id="js-ytSub"> Subscribe </button>
+
+    <p>Amazon Shipping Calculator</p>
+    <input placeholder="Cost of your order" onkeydown="handleCostKeyDown(event)">
+    <button id="js-calculate">Calculate</button>
+    <p id="js-finalCost"></p>
+
+    <input placeholder="Type something" onkeydown="writeDownOnPage(event)">
+    <p id="js-writingDown"></p>
+
+    <script>
+      const youtubeSubscribeButton = document.getElementById('js-ytSub');
+      const shippingCalculationButton = document.getElementById('js-calculate');
+      const finalCostOfOrder = document.getElementById('js-finalCost');
+      const userOrderCost = document.querySelector('input');
+      let writingDownParagraph = document.getElementById('js-writingDown');
+      let input;
+
+      //Checks the cost and add's shipping cost if needed
+      function finalCost(){
+        if(userOrderCost.value >= 40){
+          finalCostOfOrder.innerHTML = `$${(Number(userOrderCost.value)*100+1000)/100}`;
+        } else {
+          finalCostOfOrder.innerHTML = `$${Number(userOrderCost.value)}`;
+        }
+      }
+
+      //Changes the state of the button from sub to unsub and the other way around
+      function subscription(){
+        if(youtubeSubscribeButton.innerText === 'Subscribe'){
+          youtubeSubscribeButton.innerHTML = 'Subscribed';
+        } else {
+          youtubeSubscribeButton.innerHTML = 'Subscribe';
+        }
+      }
+
+      //If the Enter key is pressed, starts the finalCost method
+      function handleCostKeyDown(){
+        if(event.key === 'Enter'){ finalCost() };
+      }
+
+      //Takes the pressed key and adds it to the paragraph, if Backspace is pressed starts deleteACharacterAtTheEnd
+      function writeDownOnPage(event){
+        if(event.key === 'Enter' || event.key === 'Shift' || event.key === 'Alt'){ return; }
+
+        if(event.key !== 'Backspace'){
+          writingDownParagraph.innerHTML += event.key;
+          return;
+        }
+        deleteACharacterAtTheEnd(writingDownParagraph);
+
+      }
+
+      //Takes the input from the user and deletes the last input
+      function deleteACharacterAtTheEnd(userInput){
+        input = userInput.innerHTML;
+        input = input.substring(0, input.length-1);
+        userInput.innerHTML = input;
+      }
+
+      youtubeSubscribeButton.onclick = subscription;
+      shippingCalculationButton.onclick = finalCost;
+
+    </script>
+  </body>
+</html>

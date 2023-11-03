@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Coin Flip</title>
+    <script>
+      function Flush(){
+        localStorage.clear();
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="Flush()">Flush da toiler</button><br><br>
+    <button onclick="playGame('heads')">heads</button>
+    <button onclick="playGame('tails')">tails</button>
+    
+    <script>
+      let result;
+      let gameScore = JSON.parse(localStorage.getItem('Score')) || {
+        wins:0,
+        losses:0
+      }
+
+      function playGame(guess){
+        let flip = Math.random();
+
+        flip < 0.5 ? result = 'heads' : result = 'tails';
+
+        if(result === guess){
+          gameScore.wins+=1;
+          alert(`You win!\nWins:${gameScore.wins} Losses:${gameScore.losses}`);
+        }
+        else{
+          gameScore.losses+=1;
+          alert(`You lose!\nWins:${gameScore.wins} Losses:${gameScore.losses}`);
+        }
+
+        localStorage.setItem('Score', JSON.stringify(gameScore));
+      }
+    </script>
+  </body>
+</html>

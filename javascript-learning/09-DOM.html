@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM</title>
+    <script>
+      function Flush(){
+        localStorage.clear();
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="Flush()">Flush da toiler</button><br><br>
+    <button id="function1">funkcja</button>
+    <p id="myElement"></p>
+    <script>
+      
+      const element = document.getElementById('myElement');
+
+      function przyklad(){
+        console.log('text');
+      }
+
+      element.innerHTML = 'text'
+      const newElement = document.createElement('div');
+      const divStyle = {
+        color:'white',
+        backgroundColor:'red',
+        fontSize: '40px',
+        border: 'solid black 3px',
+        'text-align': 'center',
+        padding:'20px',
+        width: '30%',
+        margin:'auto'
+      };
+      Object.assign(newElement.style, divStyle);
+      newElement.textContent = "Div stworzony js'em";
+      document.body.appendChild(newElement);
+
+      const button1 = document.getElementById('function1');
+
+      button1.onclick = przyklad;
+    </script>
+  </body>
+</html>

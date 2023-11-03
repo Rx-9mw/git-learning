@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM projects</title>
+    <style>
+      body {
+        font-family: Arial;
+      }
+      .youtubeSubscribeButton {
+        margin: auto;
+        width: 300px;
+        font-weight: bold;
+      }
+      .ytSub {
+        border: none;
+        background-color: black;
+        color: white;
+        padding: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-weight: bold;
+        border-radius: 30px;
+        cursor: pointer;
+      }
+      .isSubscribed {
+        background-color: rgb(240, 240 , 240);
+        color: black;
+      }
+      .js-calculate, #orderCostInput {
+        height: 0px;
+        padding: 30px;
+        margin-top: 0px;
+        float: left;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-radius: 40px;
+      }
+      .js-calculate {
+        padding-top: 25px;
+        padding-bottom: 40px;
+        margin-left: 5px;
+        background-color: rgb(163, 208, 117);
+        color:white;
+        border: none;
+        cursor: pointer;
+      }
+      .amazonShipping {
+        height: 100px;
+        width: 330px;
+        margin: auto;
+        padding-top: 30px;
+        padding-left: 20px;
+      }
+      #js-finalCost {
+        position:relative;
+        float: left;
+      }
+      .wholeProject{
+        padding-top: 70px;
+        width: 400px;
+        height: 500px;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wholeProject">
+      <div class="youtubeSubscribeButton">
+        <p>Youtube Subscribe Button</p>
+        <button class="js-ytSub ytSub">Subscribe</button>  
+      </div>
+      <br>
+      <p style="margin: 30px; margin-bottom: 10px; font-weight: bold; padding-left: 20px">Amazon Shipping Calculator</p>
+      <div class="amazonShipping">
+        <input id="orderCostInput" placeholder="Cost of your order" onkeydown="handleCostKeyDown(event)">
+        <button class="js-calculate">Calculate</button>
+        <p id="js-finalCost"></p>
+      </div>
+
+      <input style="margin-left: 50px; padding: 20px; border-radius: 40px;" placeholder="Type something" onkeydown="writeDownOnPage(event)">
+      <p style="margin-left: 50px; padding: 20px;" id="js-writingDown"></p>
+    </div>
+    <script>
+      const youtubeSubscribeButton = document.querySelector('.js-ytSub');
+      const shippingCalculationButton = document.querySelector('.js-calculate');
+      const finalCostOfOrder = document.querySelector('#js-finalCost');
+      const userOrderCost = document.querySelector('input');
+      let writingDownParagraph = document.getElementById('js-writingDown');
+      let input;
+
+      //Checks the cost and add's shipping cost if needed
+      function finalCost(){
+        if(userOrderCost.value >= 40){
+          finalCostOfOrder.innerHTML = `Final cost: $${(Number(userOrderCost.value)*100+1000)/100}`;
+        } else {
+          finalCostOfOrder.innerHTML = `Final cost: $${Number(userOrderCost.value)}`;
+        }
+      }
+
+      //Changes the state of the button from sub to unsub and the other way around
+      function subscription(){
+        console.log(1);
+        if(youtubeSubscribeButton.innerText === 'Subscribe'){
+          youtubeSubscribeButton.innerHTML = 'Subscribed';
+          youtubeSubscribeButton.classList.add('isSubscribed');
+        } else {
+          youtubeSubscribeButton.innerHTML = 'Subscribe';
+          youtubeSubscribeButton.classList.remove('isSubscribed');
+        }
+      }
+
+      //If the Enter key is pressed, starts the finalCost method
+      function handleCostKeyDown(){
+        if(event.key === 'Enter'){ finalCost() };
+      }
+      
+      
+      //Takes the pressed key and adds it to the paragraph, if Backspace is pressed starts deleteACharacterAtTheEnd
+      function writeDownOnPage(event){
+        if(event.key === 'Enter' || event.key === 'Shift' || event.key === 'Alt'){ return; }
+
+        if(event.key !== 'Backspace'){
+          writingDownParagraph.innerHTML += event.key;
+          return;
+        }
+        deleteACharacterAtTheEnd(writingDownParagraph);
+
+      }
+
+      //Takes the input from the user and deletes the last input
+      function deleteACharacterAtTheEnd(userInput){
+        input = userInput.innerHTML;
+        input = input.substring(0, input.length-1);
+        userInput.innerHTML = input;
+      }
+      
+      youtubeSubscribeButton.onclick = subscription;
+      shippingCalculationButton.onclick = finalCost;
+
+    </script>
+  </body>
+</html>

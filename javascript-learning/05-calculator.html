@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Variables</title>
+  </head>
+  <body>
+    <p id="js-equation"></p>
+    <p>
+      <button onclick="calculation(1); ;">1</button>
+      <button onclick="calculation(2); ;">2</button>
+      <button onclick="calculation(3); ;">3</button>
+    </p>
+    <p>
+      <button onclick="calculation(4); ;">4</button>
+      <button onclick="calculation(5); ;">5</button>
+      <button onclick="calculation(6); ;">6</button>
+    </p>
+    <p>
+      <button onclick="calculation(7); ;">7</button>
+      <button onclick="calculation(8); ;">8</button>
+      <button onclick="calculation(9); ;">9</button>
+    </p>
+    <p>
+      <button onclick="calculation('+'); ;">+</button>
+      <button onclick="calculation('-'); ;">-</button>
+      <button onclick="calculation('*'); ;">*</button>
+      <button onclick="calculation('/'); ;">/</button>
+      <button onclick="calculationResult();">=</button>
+    </p>
+    <button onclick="equation = ''; localStorage.removeItem('equation'); 
+    paragraph.innerHTML = '';">Clear</button>
+
+    <script>
+      let equation = localStorage.getItem('equation') || '';
+      let lastCharacter = equation[equation.length-1];
+      let paragraph = document.getElementById('js-equation');
+      paragraph.innerHTML = equation || '';
+      function addingToTheParagraph() {
+
+      }
+
+      function calculation(number){
+        if(!isNaN(parseFloat(number))==false && !isNaN(parseFloat(lastCharacter))==false || equation === '' && typeof number === 'string' ){ return; }
+
+        equation += number;
+        console.log(equation);
+        lastCharacter = equation[equation.length-1]
+
+        paragraph.innerHTML = equation;
+
+        localStorage.setItem('equation', equation);
+      }
+
+      function calculationResult(){
+        lastCharacter = equation[equation.length-1];
+        if (equation === ''){ return; }
+        if (!isNaN(parseFloat(lastCharacter))==false){
+          equation = equation.substring(0, equation.length-1);
+        }
+        equation = eval(equation);
+        equation = equation.toString()
+        console.log(equation);
+
+        paragraph.innerHTML = equation;
+        
+        localStorage.setItem('equation', equation);
+      }
+    </script>
+  </body>
+</html>

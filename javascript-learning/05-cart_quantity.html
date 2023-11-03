@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cart Quantity</title>
+  </head>
+  <body>
+    <p>Cart Quantity</p>
+    <button onclick="showItemQuantity()">Quantity</button>
+    
+    <button onclick="addToCart(1);">Add to cart</button>
+
+    <button onclick="addToCart(2);">+2</button>
+    
+    <button onclick="addToCart(3);">+3</button>
+      
+    <button onclick="deleteFromCart(2);">-2</button>
+
+    <button onclick="deleteFromCart(3);">-3</button>
+
+    <button onclick="resetcartItems()">Reset Cart</button>
+
+    <p id="js-finalAmountOfProducts"></p>
+
+    <script>
+      let cart = Number(localStorage.getItem('storage')) || 0;
+      let quantity = document.getElementById('js-finalAmountOfProducts');
+      quantity.innerHTML = `Cart quantity: ${cart}`;
+
+      function addToCart(number)
+      {
+        console.log(cart);
+        if (cart + number > 10)
+        {
+          return;
+        }
+        cart += number;
+        localStorage.setItem('storage', cart);
+        quantity.innerHTML = `Cart quantity: ${cart}`;
+      }
+      function deleteFromCart(number)
+      {
+        if (cart < number)
+        {
+          cart = 0;
+          localStorage.removeItem('storage');
+          quantity.innerHTML = `Cart quantity: ${cart}`;
+        }
+        else
+        {
+          cart -= number;
+          localStorage.setItem('storage', cart);
+          quantity.innerHTML = `Cart quantity: ${cart}`;
+        }
+      }
+      function showItemQuantity()
+      {
+        console.log(`Items in cart: ${cart}`);
+      }
+      function resetcartItems()
+      {
+        cart = 0;
+        localStorage.removeItem('storage');
+        quantity.innerHTML = `Cart quantity: ${cart}`;
+      }
+    </script>
+  </body>
+</html>
