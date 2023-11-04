@@ -1,5 +1,1 @@
-let greeting = 'hello';
-
-if(true){
-  let greeting = 'hellos'
-}
+console.log('changed code');
