@@ -35,9 +35,6 @@
       let lastCharacter = equation[equation.length-1];
       let paragraph = document.getElementById('js-equation');
       paragraph.innerHTML = equation || '';
-      function addingToTheParagraph() {
-
-      }
 
       function calculation(number){
         if(!isNaN(parseFloat(number))==false && !isNaN(parseFloat(lastCharacter))==false || equation === '' && typeof number === 'string' ){ return; }
