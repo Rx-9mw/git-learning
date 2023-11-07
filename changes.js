@@ -48,3 +48,22 @@ function Sort(arr, number) {
 }
 
 console.log(Sort(numberArray, 6));
+
+const users = [
+  { firstName: "A", lastName: "LA", age: 26},
+  { firstName: "B", lastName: "LB", age: 75},
+  { firstName: "C", lastName: "LC", age: 50},
+  { firstName: "D", lastName: "LD", age: 26}
+]
+
+const overThrity = users.reduce((acc, curr) => {
+  if(curr.age < 30){
+    acc.push(curr.firstName);
+  }
+  return acc;
+}, []);
+
+const overThirtyChain = users.filter((x) => x.age < 30).map((x) => x.firstName);
+
+console.log(overThrity);
+console.log(overThirtyChain);
