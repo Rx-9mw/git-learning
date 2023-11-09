@@ -1,4 +1,3 @@
-
 // TASK 1
 
 // a leader is an element that occurs at more than 50% of positions of an array
@@ -41,7 +40,6 @@
 // not exist)
 //
 // bonus points for a solution with the lowest computational complexity
-
 
 const input1 = [7, 2, 3, 1, 5, 6] // sum = 6, solution = 3, 4
 
